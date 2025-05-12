@@ -7,8 +7,9 @@ class MealApi:
         self.base_url = "https://www.themealdb.com/api/json/v1/1/"
     
     def format_categories(self,category_list):
-        for item in category_list:
-            print(f' -{item}')
+        with open('categorias;txt', 'w', encoding='utf-8') as file:
+            for item in category_list:
+                file.write(f'- {item}\n')
             
 
     def get_categories(self):
@@ -81,26 +82,31 @@ class MealApi:
                 }
                 
             else:
-                return('Erro ao acessar a API, tente mais tarde!')
+                return(f'Erro ao acessar a API, Erro: {response.status_code}')
 
         except requests.exceptions.Timeout:
             return('Timeout')
             
         except requests.exceptions.TooManyRedirects:
             return('Too many redirects, try again later')
+        
+    
 
 
 
 start_time = time.perf_counter()
 
 api = MealApi()
+categorias = api.get_categories()
+# api.format_categories(categorias)
+# print('\n')
+# print(api.get_meal_by_category('Seafood'))
 
-print(api.get_categories())
-print('\n')
-print(api.get_meal_by_category('Seafood'))
+# print(f'\n{api.get_recipe('Pasta')}\n')
 
-print(f'\n{api.get_recipe('Pasta')}\n')
 
+            
+            
 end_time = time.perf_counter()
 
 print(f"\nTempo de execução: {end_time - start_time:.2f} segundos")
