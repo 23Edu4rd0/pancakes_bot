@@ -1,16 +1,9 @@
-import time 
 import requests
 
 class MealApi:
     
     def __init__(self):
-        self.base_url = "https://www.themealdb.com/api/json/v1/1/"
-    
-    def format_categories(self,category_list):
-        with open('categorias;txt', 'w', encoding='utf-8') as file:
-            for item in category_list:
-                file.write(f'- {item}\n')
-            
+        self.base_url = "https://www.themealdb.com/api/json/v1/1/"        
 
     def get_categories(self):
         api_url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
@@ -89,24 +82,3 @@ class MealApi:
             
         except requests.exceptions.TooManyRedirects:
             return('Too many redirects, try again later')
-        
-    
-
-
-
-start_time = time.perf_counter()
-
-api = MealApi()
-categorias = api.get_categories()
-# api.format_categories(categorias)
-# print('\n')
-# print(api.get_meal_by_category('Seafood'))
-
-# print(f'\n{api.get_recipe('Pasta')}\n')
-
-
-            
-            
-end_time = time.perf_counter()
-
-print(f"\nTempo de execução: {end_time - start_time:.2f} segundos")

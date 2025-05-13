@@ -1,5 +1,5 @@
 import json
-from main import MealApi
+from mealapi import MealApi
 
 
 class Impress:
